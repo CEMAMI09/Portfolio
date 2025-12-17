@@ -71,11 +71,6 @@
             transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
         }
 
-        @media (prefers-color-scheme: dark) {
-            body:not([data-theme="light"]) {
-                color-scheme: dark;
-            }
-        }
 
         nav.scrolled {
             box-shadow: var(--shadow-lg);
@@ -151,6 +146,114 @@
             height: 3px;
             background: var(--text-primary);
             transition: all 0.3s ease;
+        }
+
+        /* Framework Selector Dropdown */
+        .framework-selector {
+            position: relative;
+            margin-right: 1rem;
+        }
+
+        .framework-selector-button {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            min-width: 100px;
+            justify-content: space-between;
+        }
+
+        #frameworkIconContainer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .framework-selector-button:hover {
+            border-color: var(--primary-color);
+            background-color: var(--bg-primary);
+        }
+
+        .framework-selector-button svg.chevron {
+            width: 14px;
+            height: 14px;
+            fill: var(--text-secondary);
+            transition: transform 0.3s ease;
+        }
+
+        .framework-selector.active .framework-selector-button svg.chevron {
+            transform: rotate(180deg);
+        }
+
+        .framework-icon {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            display: block;
+        }
+
+        .framework-dropdown {
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            right: 0;
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: var(--shadow-lg);
+            min-width: 150px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .framework-selector.active .framework-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .framework-option {
+            padding: 0.75rem 1rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: background-color 0.2s ease;
+            font-size: 0.875rem;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .framework-option-icon {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            display: block;
+        }
+
+        .framework-option:hover {
+            background-color: var(--bg-secondary);
+        }
+
+        .framework-option.active {
+            background-color: var(--bg-secondary);
+            color: var(--primary-color);
+            font-weight: 600;
         }
 
         /* Dark Mode Toggle */
@@ -540,41 +643,56 @@
             letter-spacing: -0.01em;
         }
 
-        .project-meta {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-bottom: 1rem;
+        .project-ownership {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .project-summary {
+            color: var(--text-primary);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1.25rem;
+            font-weight: 500;
+        }
+
+        .project-tech-stack {
             font-size: 0.9rem;
             color: var(--text-secondary);
-        }
-
-        .project-tag {
-            background-color: var(--bg-secondary);
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            transition: background-color 0.3s ease;
-        }
-
-        .project-case-study {
-            margin: 1rem 0;
-        }
-
-        .case-study-section {
-            margin-bottom: 1rem;
-        }
-
-        .case-study-label {
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 0.25rem;
-            display: block;
-        }
-
-        .case-study-text {
-            color: var(--text-secondary);
+            margin-bottom: 1.25rem;
             line-height: 1.6;
+        }
+
+        .project-built-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .project-built-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1.25rem 0;
+        }
+
+        .project-built-list li {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+            padding-left: 1.25rem;
+            position: relative;
+        }
+
+        .project-built-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
         }
 
         .project-links {
@@ -623,16 +741,39 @@
             background: var(--border-color);
         }
 
-        /* Architecture Diagram Placeholder */
+        /* Architecture Diagram */
+        .architecture-toggle {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 0.5rem 0;
+            margin-bottom: 0.75rem;
+            text-align: left;
+            transition: color 0.3s ease;
+        }
+
+        .architecture-toggle:hover {
+            color: var(--secondary-color);
+        }
+
         .architecture-diagram {
-            margin: 2rem 0;
+            margin: 0.75rem 0 1.25rem 0;
             background-color: var(--bg-secondary);
-            padding: 2rem;
-            border-radius: 12px;
-            text-align: center;
+            padding: 1.25rem;
+            border-radius: 8px;
             color: var(--text-secondary);
-            border: 2px dashed var(--border-color);
-            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            display: none;
+        }
+
+        .architecture-diagram.show {
+            display: block;
         }
 
         /* Contact Section */
@@ -788,6 +929,16 @@
 
             .section-title {
                 font-size: 2rem;
+            }
+
+            .framework-selector {
+                margin-right: 0.5rem;
+            }
+
+            .framework-selector-button {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.6rem;
+                min-width: 80px;
             }
         }
 
@@ -954,6 +1105,47 @@
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
             <div style="display: flex; align-items: center; gap: 1rem;">
+                <div class="framework-selector" id="frameworkSelector">
+                    <button class="framework-selector-button" id="frameworkButton">
+                        <span id="frameworkIconContainer"></span>
+                        <span id="frameworkCurrent">Vanilla JS</span>
+                        <svg class="chevron" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>
+                    </button>
+                    <div class="framework-dropdown" id="frameworkDropdown">
+                        <a href="/" class="framework-option active" data-framework="vanilla">
+                            <svg class="framework-option-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="2" y="2" width="20" height="20" rx="3" fill="#F7DF1E"/>
+                                <g fill="#323330" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="end">
+                                    <text x="20" y="19">JS</text>
+                                </g>
+                            </svg>
+                            <span>Vanilla JS</span>
+                        </a>
+                        <a href="/react" class="framework-option" data-framework="react">
+                            <svg class="framework-option-icon" viewBox="-11.5 -10.23174 23 20.46348" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="0" cy="0" r="2.05" fill="#61DAFB"/>
+                                <g stroke="#61DAFB" stroke-width="1" fill="none">
+                                    <ellipse rx="11" ry="4.2"/>
+                                    <ellipse rx="11" ry="4.2" transform="rotate(60)"/>
+                                    <ellipse rx="11" ry="4.2" transform="rotate(120)"/>
+                                </g>
+                            </svg>
+                            <span>React</span>
+                        </a>
+                        <a href="/vue" class="framework-option" data-framework="vue">
+                            <svg class="framework-option-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M24 1.61h-9.24L12 5.16 9.24 1.61H0l12 20.78L24 1.61zM12 14.08L5.74 2.23h4.43L12 6.41l1.83-4.18h4.43L12 14.08z" fill="#4FC08D"/>
+                            </svg>
+                            <span>Vue</span>
+                        </a>
+                        <a href="/angular" class="framework-option" data-framework="angular">
+                            <svg class="framework-option-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9.93 12.645h4.134L11.996 7.74zM11.996.009L.686 3.988l1.725 14.76 9.585 5.243 9.588-5.238L23.308 3.99 11.996.01zm7.104 19.12H15.87l-1.583-3.896H9.709L8.128 19.13H4.866l7.13-17.378 7.204 17.377z" fill="#DD0031"/>
+                            </svg>
+                            <span>Angular</span>
+                        </a>
+                    </div>
+                </div>
                 <div class="theme-toggle" id="themeToggle" title="Toggle dark mode">
                     <div class="theme-toggle-slider">🌙</div>
                 </div>
@@ -1101,49 +1293,28 @@
             <div class="project-card" data-skills="next.js,typescript,react,postgresql,vercel,railway,stripe,gemini ai,javascript,three.js">
                 <div class="project-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
                 <div class="project-content">
-                    <h3 class="project-title">BlueprintCAD.io</h3>
-                    <div class="project-meta">
-                        <span class="project-tag">Next.js</span>
-                        <span class="project-tag">TypeScript</span>
-                        <span class="project-tag">React</span>
-                        <span class="project-tag">PostgreSQL</span>
-                        <span class="project-tag">Vercel</span>
-                        <span class="project-tag">Railway</span>
-                        <span class="project-tag">Stripe</span>
-                        <span class="project-tag">Gemini AI</span>
-                    </div>
+                    <h3 class="project-title">BlueprintCAD — Full-Stack SaaS Platform</h3>
                     
-                    <div class="project-case-study">
-                        <div class="case-study-section">
-                            <span class="case-study-label">Problem:</span>
-                            <p class="case-study-text">
-                                There was no centralized platform for 3D model and CAD file sharing, collaboration, and management. 
-                                Users needed a way to organize, share, and monetize their 3D assets while providing an interactive 
-                                viewing experience.
-                            </p>
-                        </div>
-                        <div class="case-study-section">
-                            <span class="case-study-label">Solution:</span>
-                            <p class="case-study-text">
-                                Built a full-stack SaaS platform with Next.js and TypeScript (100k+ lines of code) featuring 
-                                multi-provider authentication (email, Google, GitHub), project management, social collaboration 
-                                tools, and an interactive 3D viewer. Integrated Stripe for payments, PostgreSQL for data storage 
-                                on Railway, Cloudflare R2 for asset storage, and Gemini AI for intelligent quote generation. 
-                                Deployed frontend on Vercel with serverless architecture.
-                            </p>
-                        </div>
-                        <div class="case-study-section">
-                            <span class="case-study-label">Result:</span>
-                            <p class="case-study-text">
-                                Created a production-ready platform enabling users to upload, organize, share, and monetize 3D models. 
-                                The marketplace and collaboration features provide a complete ecosystem for 3D content creators and 
-                                consumers, with scalable architecture supporting growth.
-                            </p>
-                        </div>
+                    <div class="project-ownership">Sole Developer</div>
+                    <p class="project-summary">Built a production-ready SaaS platform for 3D model and CAD file collaboration, versioning, and monetization.</p>
+                    
+                    <div class="project-tech-stack">
+                        <strong>Tech Stack:</strong> Next.js · TypeScript · React · PostgreSQL · Vercel · Railway · Stripe · Cloudflare R2 · Gemini AI
                     </div>
 
+                    <div class="project-built-title">What I Built</div>
+                    <ul class="project-built-list">
+                        <li>End-to-end authentication (email, Google, GitHub)</li>
+                        <li>Team-based permissions and project folders</li>
+                        <li>File upload, rendering, and version/branch management</li>
+                        <li>Analytics dashboards and usage tracking</li>
+                        <li>Stripe-based payments and marketplace logic</li>
+                        <li>AI-powered quote generation with Gemini</li>
+                    </ul>
+
+                    <button class="architecture-toggle" onclick="this.nextElementSibling.classList.toggle('show'); this.textContent = this.nextElementSibling.classList.contains('show') ? 'Hide Architecture' : 'View Architecture';">View Architecture</button>
                     <div class="architecture-diagram">
-                        <p><strong>Architecture:</strong> Next.js Frontend (Vercel) → API Routes → PostgreSQL (Railway) → Cloudflare R2 (Assets) → Stripe (Payments) → Gemini AI (Quotes)</p>
+                        <strong>Architecture:</strong> Next.js (Vercel) → API Routes → PostgreSQL (Railway) → Cloudflare R2 → Stripe → Gemini AI
                     </div>
 
                     <div class="project-links">
@@ -1162,42 +1333,23 @@
             <div class="project-card" data-skills="html,css,javascript,aws lightsail,php">
                 <div class="project-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
                 <div class="project-content">
-                    <h3 class="project-title">Intake Forms & Certification Quizzes</h3>
-                    <div class="project-meta">
-                        <span class="project-tag">HTML</span>
-                        <span class="project-tag">CSS</span>
-                        <span class="project-tag">JavaScript</span>
-                        <span class="project-tag">AWS Lightsail</span>
-                        <span class="project-tag">Client Management</span>
-                    </div>
+                    <h3 class="project-title">Intake Forms & Staff Dashboard</h3>
                     
-                    <div class="project-case-study">
-                        <div class="case-study-section">
-                            <span class="case-study-label">Problem:</span>
-                            <p class="case-study-text">
-                                Clients needed a streamlined system to collect intake information and conduct certification quizzes. 
-                                Staff required a centralized dashboard to view and manage client data efficiently, replacing 
-                                manual processes with automated workflows.
-                            </p>
-                        </div>
-                        <div class="case-study-section">
-                            <span class="case-study-label">Solution:</span>
-                            <p class="case-study-text">
-                                Developed custom intake forms and certification quiz systems using HTML, CSS, and JavaScript. 
-                                Created an administrative dashboard for staff to manage client information, track completions, 
-                                and monitor certification status. Deployed the entire system on AWS Lightsail for reliable hosting 
-                                and easy scalability.
-                            </p>
-                        </div>
-                        <div class="case-study-section">
-                            <span class="case-study-label">Result:</span>
-                            <p class="case-study-text">
-                                Streamlined client onboarding and certification processes. Staff can now efficiently manage client 
-                                data through a centralized dashboard, reducing manual data entry time and improving tracking accuracy. 
-                                The system handles form submissions and quiz completions automatically.
-                            </p>
-                        </div>
+                    <div class="project-ownership">Sole Developer</div>
+                    <p class="project-summary">Built a secure intake form and internal dashboard system to manage client data and certification workflows.</p>
+                    
+                    <div class="project-tech-stack">
+                        <strong>Tech Stack:</strong> HTML · CSS · JavaScript · AWS Lightsail
                     </div>
+
+                    <div class="project-built-title">What I Built</div>
+                    <ul class="project-built-list">
+                        <li>Public intake forms and certification quizzes</li>
+                        <li>Secure staff login and admin dashboard</li>
+                        <li>Client submission management and tracking</li>
+                        <li>Automated scoring and completion tracking</li>
+                        <li>Deployed and maintained on AWS Lightsail</li>
+                    </ul>
 
                     <div class="project-links">
                         <a href="#" class="project-link project-link-primary" target="_blank">
@@ -1215,50 +1367,23 @@
             <div class="project-card" data-skills="vue 3,aws cognito,lambda,dynamodb,api gateway,javascript">
                 <div class="project-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
                 <div class="project-content">
-                    <h3 class="project-title">SightGard Twilight - Certification Quiz System</h3>
-                    <div class="project-meta">
-                        <span class="project-tag">Vue 3</span>
-                        <span class="project-tag">AWS Cognito</span>
-                        <span class="project-tag">Lambda</span>
-                        <span class="project-tag">DynamoDB</span>
-                        <span class="project-tag">API Gateway</span>
-                        <span class="project-tag">Healthcare</span>
-                    </div>
+                    <h3 class="project-title">SightGard Twilight — Certification Quiz System</h3>
                     
-                    <div class="project-case-study">
-                        <div class="case-study-section">
-                            <span class="case-study-label">Problem:</span>
-                            <p class="case-study-text">
-                                Eye care professionals administering dark adaptation tests needed a certification system to ensure 
-                                proper training and compliance. The system required randomized quizzes, progress tracking, and 
-                                certification status management integrated with the clinical management platform.
-                            </p>
-                        </div>
-                        <div class="case-study-section">
-                            <span class="case-study-label">Solution:</span>
-                            <p class="case-study-text">
-                                Designed and implemented the certification quiz system using Vue 3 with Composition API. Built a 
-                                10-question interactive quiz covering CPT codes, patient selection, test procedures, and device 
-                                operation. Integrated with AWS Cognito for authentication, Lambda functions for quiz logic, 
-                                DynamoDB for storing results, and API Gateway for RESTful endpoints. Implemented question 
-                                randomization, real-time progress tracking, and automatic certification scoring with three-tier 
-                                results (certified, certified with refresher, or retrain required).
-                            </p>
-                        </div>
-                        <div class="case-study-section">
-                            <span class="case-study-label">Result:</span>
-                            <p class="case-study-text">
-                                Provided a comprehensive certification system that ensures operator competency for the dark adaptation 
-                                test. The quiz history tracking allows clinics to monitor staff certification status over time, 
-                                improving quality assurance and compliance with clinical standards. The randomized question system 
-                                prevents memorization and ensures genuine understanding of procedures.
-                            </p>
-                        </div>
+                    <div class="project-ownership">Sole Developer</div>
+                    <p class="project-summary">Developed a healthcare certification system to validate clinical staff competency for dark adaptation testing.</p>
+                    
+                    <div class="project-tech-stack">
+                        <strong>Tech Stack:</strong> Vue 3 · AWS Cognito · Lambda · DynamoDB · API Gateway
                     </div>
 
-                    <div class="architecture-diagram">
-                        <p><strong>Architecture:</strong> Vue 3 Frontend → AWS Cognito (Auth) → API Gateway → Lambda Functions → DynamoDB (Quiz Results & History)</p>
-                    </div>
+                    <div class="project-built-title">What I Built</div>
+                    <ul class="project-built-list">
+                        <li>Randomized question logic and quiz system</li>
+                        <li>Real-time progress tracking and scoring</li>
+                        <li>Certification tiers and history tracking</li>
+                        <li>AWS Cognito authentication integration</li>
+                        <li>DynamoDB data storage and API Gateway endpoints</li>
+                    </ul>
 
                     <div class="project-links">
                         <a href="#" class="project-link project-link-primary" target="_blank">
@@ -1304,13 +1429,27 @@
     </footer>
 
     <script>
-        // Dark Mode Toggle
+        // Dark Mode Toggle - Default to light mode
         const themeToggle = document.getElementById('themeToggle');
-        const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        // Default to light mode, only use saved preference if it exists
+        const currentTheme = localStorage.getItem('theme') || 'light';
         
         if (currentTheme === 'dark') {
             document.documentElement.setAttribute('data-theme', 'dark');
             themeToggle.querySelector('.theme-toggle-slider').textContent = '☀️';
+        } else {
+            // Ensure light mode is set
+            document.documentElement.setAttribute('data-theme', 'light');
+            themeToggle.querySelector('.theme-toggle-slider').textContent = '🌙';
+        }
+
+        // Scroll to top on page load
+        window.scrollTo(0, 0);
+        
+        // Also ensure we're at the top after any initial renders
+        if (window.location.hash && !window.location.hash.startsWith('#skill/')) {
+            // Clear hash if it's not a skill page and scroll to top
+            window.history.replaceState('', document.title, window.location.pathname);
         }
 
         themeToggle.addEventListener('click', () => {
@@ -1321,6 +1460,88 @@
             themeToggle.querySelector('.theme-toggle-slider').textContent = newTheme === 'dark' ? '☀️' : '🌙';
             localStorage.setItem('theme', newTheme);
         });
+
+        // Framework Selector
+        const frameworkSelector = document.getElementById('frameworkSelector');
+        const frameworkButton = document.getElementById('frameworkButton');
+        const frameworkDropdown = document.getElementById('frameworkDropdown');
+        const frameworkCurrent = document.getElementById('frameworkCurrent');
+        const frameworkIconContainer = document.getElementById('frameworkIconContainer');
+        const frameworkOptions = document.querySelectorAll('.framework-option');
+
+        // Framework icons mapping
+        const frameworkIcons = {
+            vanilla: `<svg class="framework-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="2" width="20" height="20" rx="3" fill="#F7DF1E"/>
+                <g fill="#323330" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="end">
+                    <text x="20" y="19">JS</text>
+                </g>
+            </svg>`,
+            react: `<svg class="framework-icon" viewBox="-11.5 -10.23174 23 20.46348" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="0" cy="0" r="2.05" fill="#61DAFB"/>
+                <g stroke="#61DAFB" stroke-width="1" fill="none">
+                    <ellipse rx="11" ry="4.2"/>
+                    <ellipse rx="11" ry="4.2" transform="rotate(60)"/>
+                    <ellipse rx="11" ry="4.2" transform="rotate(120)"/>
+                </g>
+            </svg>`,
+            vue: `<svg class="framework-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M24 1.61h-9.24L12 5.16 9.24 1.61H0l12 20.78L24 1.61zM12 14.08L5.74 2.23h4.43L12 6.41l1.83-4.18h4.43L12 14.08z" fill="#4FC08D"/>
+            </svg>`,
+            angular: `<svg class="framework-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9.93 12.645h4.134L11.996 7.74zM11.996.009L.686 3.988l1.725 14.76 9.585 5.243 9.588-5.238L23.308 3.99 11.996.01zm7.104 19.12H15.87l-1.583-3.896H9.709L8.128 19.13H4.866l7.13-17.378 7.204 17.377z" fill="#DD0031"/>
+            </svg>`
+        };
+
+        const frameworkNames = {
+            vanilla: 'Vanilla JS',
+            react: 'React',
+            vue: 'Vue',
+            angular: 'Angular'
+        };
+
+        if (frameworkSelector && frameworkButton && frameworkCurrent && frameworkIconContainer) {
+            // Detect current framework from pathname
+            const currentPath = window.location.pathname;
+            let currentFramework = 'vanilla';
+            if (currentPath.includes('/react')) currentFramework = 'react';
+            else if (currentPath.includes('/vue')) currentFramework = 'vue';
+            else if (currentPath.includes('/angular')) currentFramework = 'angular';
+
+            // Update current framework display with icon and name
+            frameworkCurrent.textContent = frameworkNames[currentFramework];
+            frameworkIconContainer.innerHTML = frameworkIcons[currentFramework];
+            
+            // Mark active framework
+            frameworkOptions.forEach(option => {
+                const optionFramework = option.getAttribute('data-framework');
+                option.classList.remove('active');
+                if (optionFramework === currentFramework) {
+                    option.classList.add('active');
+                }
+            });
+
+            // Toggle dropdown
+            frameworkButton.addEventListener('click', (e) => {
+                e.stopPropagation();
+                frameworkSelector.classList.toggle('active');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!frameworkSelector.contains(e.target)) {
+                    frameworkSelector.classList.remove('active');
+                }
+            });
+
+            // Close dropdown on mobile menu toggle
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            if (mobileMenuToggle) {
+                mobileMenuToggle.addEventListener('click', () => {
+                    frameworkSelector.classList.remove('active');
+                });
+            }
+        }
 
         // Interactive Skill Visualization
         const skills = [
