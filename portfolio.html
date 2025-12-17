@@ -1,0 +1,1705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional Portfolio - Cody Emami - Full-Stack Developer specializing in AWS and data-driven solutions">
+    <title>Cody Emami - Full-Stack Developer Portfolio</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb;
+            --bg-dark: #111827;
+            --border-color: #e5e7eb;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.12);
+            --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #3b82f6;
+            --secondary-color: #2563eb;
+            --accent-color: #60a5fa;
+            --text-primary: #f9fafb;
+            --text-secondary: #d1d5db;
+            --bg-primary: #111827;
+            --bg-secondary: #1f2937;
+            --bg-dark: #030712;
+            --border-color: #374151;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.5);
+            --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: auto;
+            transition: background-color 0.3s ease;
+            background-color: var(--bg-primary);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: var(--bg-primary);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body:not([data-theme="light"]) {
+                color-scheme: dark;
+            }
+        }
+
+        nav.scrolled {
+            box-shadow: var(--shadow-lg);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary-color);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        /* Dark Mode Toggle */
+        .theme-toggle {
+            background-color: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            width: 60px;
+            height: 30px;
+            position: relative;
+            cursor: pointer;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            margin-left: 1rem;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--primary-color);
+        }
+
+        .theme-toggle-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 22px;
+            height: 22px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+        }
+
+        [data-theme="dark"] .theme-toggle-slider {
+            transform: translateX(30px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            position: relative;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            width: 100%;
+            text-align: left;
+            padding: 4rem 2rem;
+            position: relative;
+            margin-left: 0;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            transition: color 0.3s ease;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+
+        .hero .description {
+            font-size: 1.125rem;
+            margin-bottom: 2.5rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            max-width: 650px;
+            transition: color 0.3s ease;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            background: var(--bg-secondary);
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: transparent;
+            transition: color 0.3s ease;
+        }
+
+        .section-title {
+            font-size: 2.75rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+            transition: color 0.3s ease;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 4rem;
+            font-size: 1.125rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+            transition: color 0.3s ease;
+        }
+
+        /* About Section */
+        .about {
+            background-color: transparent;
+        }
+
+        .about-container {
+            background-color: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 3rem;
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-image::before {
+            content: '👤';
+            font-size: 8rem;
+            opacity: 0.3;
+        }
+
+        /* Tech Stack */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .tech-card {
+            background-color: var(--bg-primary);
+            padding: 2rem 1.5rem;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary-color);
+            transform: scaleX(0);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .tech-card * {
+            transition: color 0.3s ease;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary-color);
+        }
+
+        .tech-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .tech-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tech-icon svg {
+            width: 48px;
+            height: 48px;
+            fill: var(--primary-color);
+        }
+
+        .tech-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Projects Section */
+        .projects {
+            background-color: transparent;
+            position: relative;
+        }
+
+        /* Skill Projects Page */
+        .skill-projects-page {
+            display: none;
+            min-height: 100vh;
+            padding-top: 100px;
+        }
+
+        .skill-projects-page.active {
+            display: block;
+        }
+
+        .skill-header {
+            padding: 4rem 2rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 3rem;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-button:hover {
+            color: var(--primary-color);
+        }
+
+        .skill-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .skill-header .skill-description {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background-color: var(--bg-primary);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.2s ease, box-shadow 0.2s ease !important;
+            border: 1px solid var(--border-color);
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px) scale(1.02) !important;
+            box-shadow: var(--shadow-xl) !important;
+            border-color: var(--primary-color) !important;
+            transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.2s ease, box-shadow 0.2s ease !important;
+        }
+
+
+        .project-image {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s ease;
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.05);
+            transition: transform 0.2s ease;
+        }
+
+        .project-image::before {
+            content: '📊';
+            font-size: 4rem;
+            opacity: 0.4;
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-title {
+            font-size: 1.625rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .project-tag {
+            background-color: var(--bg-secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .project-case-study {
+            margin: 1rem 0;
+        }
+
+        .case-study-section {
+            margin-bottom: 1rem;
+        }
+
+        .case-study-label {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.25rem;
+            display: block;
+        }
+
+        .case-study-text {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .project-link {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-link svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        .project-link-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .project-link-primary:hover {
+            background: var(--secondary-color);
+            transform: translateX(3px);
+        }
+
+        .project-link-secondary {
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+
+        .project-link-secondary:hover {
+            background: var(--border-color);
+        }
+
+        /* Architecture Diagram Placeholder */
+        .architecture-diagram {
+            margin: 2rem 0;
+            background-color: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            color: var(--text-secondary);
+            border: 2px dashed var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Contact Section */
+        .contact {
+            background-color: transparent;
+        }
+
+        .contact-container {
+            background-color: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 3rem;
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-primary);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-link svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .contact-link:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* Scroll Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Additional scroll reveal classes for more granular control */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Override scroll-reveal transition for hover states on project cards */
+        .project-card.scroll-reveal {
+            transition: opacity 0.8s ease, transform 0.8s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.2s ease !important;
+        }
+
+        .project-card.scroll-reveal:hover {
+            transition: opacity 0.8s ease, transform 0.2s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.2s ease !important;
+        }
+
+        .project-card.scroll-reveal.visible {
+            transition: opacity 0.8s ease, transform 0.8s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.2s ease !important;
+        }
+
+        /* Stagger delays for children */
+        .scroll-reveal-delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .scroll-reveal-delay-2 {
+            transition-delay: 0.2s;
+        }
+
+        .scroll-reveal-delay-3 {
+            transition-delay: 0.3s;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--bg-primary);
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: var(--shadow);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loader {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--bg-secondary);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Interactive Skill Visualization */
+        .skill-visualization {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            margin: 3rem 0;
+            background-color: var(--bg-secondary);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid var(--border-color);
+            padding: 2rem;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .skill-node {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 3px solid transparent;
+            box-shadow: var(--shadow);
+            text-align: center;
+            padding: 0.5rem;
+            word-wrap: break-word;
+            z-index: 5;
+            animation: floatNode 3s ease-in-out infinite;
+        }
+
+        .skill-node:nth-child(even) {
+            animation-delay: -1.5s;
+        }
+
+        @keyframes floatNode {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .skill-node:hover {
+            transform: translateY(-5px) scale(1.25);
+            z-index: 10;
+            border-color: var(--accent-color);
+            box-shadow: var(--shadow-xl);
+            animation: none;
+        }
+
+        .skill-node.active {
+            transform: scale(1.15);
+            z-index: 10;
+            border-color: var(--accent-color);
+            box-shadow: var(--shadow-lg);
+            animation: none;
+        }
+
+        .skill-node.selected {
+            border-color: var(--primary-color);
+            border-width: 4px;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
+        }
+
+        .skill-connection {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-color), transparent);
+            opacity: 0.2;
+            transform-origin: left center;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .skill-node:hover ~ .skill-connection,
+        .skill-connection.highlight {
+            opacity: 0.6;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+        }
+
+        .skill-category {
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .skill-tooltip {
+            position: absolute;
+            background-color: var(--bg-primary);
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            pointer-events: none;
+            opacity: 0;
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+            z-index: 100;
+            box-shadow: var(--shadow-lg);
+            white-space: nowrap;
+        }
+
+        .skill-tooltip.show {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .skill-visualization {
+                height: 400px;
+                padding: 1rem;
+            }
+
+            .skill-node {
+                width: 55px;
+                height: 55px;
+                font-size: 0.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Cody Emami</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#tech" class="nav-link">Tech Stack</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <div class="theme-toggle" id="themeToggle" title="Toggle dark mode">
+                    <div class="theme-toggle-slider">🌙</div>
+                </div>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Full-Stack Developer</h1>
+            <p class="subtitle">Building Things That Actually Get Used</p>
+            <p class="description">Clean, fast, and reliable applications from end to end. React, Next.js, Node.js, SQL, and AWS.</p>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn btn-primary" id="viewWorkBtn">View My Work</a>
+                <a href="#contact" class="btn btn-secondary" id="getInTouchBtn">Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skill Projects Page (Hidden by default) -->
+    <div class="skill-projects-page" id="skillProjectsPage">
+        <div class="skill-header">
+            <a href="#" class="back-button" id="backButton">← Back to Portfolio</a>
+            <h1 id="skillPageTitle">Projects</h1>
+            <p class="skill-description" id="skillPageDescription">Projects using this technology</p>
+        </div>
+        <section class="projects">
+            <div class="project-grid" id="skillProjectsGrid">
+                <!-- Projects will be dynamically loaded here -->
+            </div>
+        </section>
+    </div>
+
+    <!-- About Section -->
+    <section class="about fade-in" id="about">
+        <h2 class="section-title scroll-reveal">About Me</h2>
+        <p class="section-subtitle scroll-reveal scroll-reveal-delay-1">Full-stack developer who enjoys building things that actually get used</p>
+        <div class="about-container">
+            <div class="about-content">
+            <div class="about-text">
+                <p>
+                    I'm Cody Emami, a full-stack developer who enjoys building things that actually get used. 
+                    I work with tools like React, Next.js, Node.js, SQL, and AWS, and I focus on creating apps 
+                    that are clean, fast, and reliable from end to end.
+                </p>
+                <p style="margin-top: 1rem;">
+                    Most of what I've learned comes from real projects, not tutorials. I've built SaaS tools, 
+                    dashboards, calculators, and internal systems, and I care a lot about structure, scalability, 
+                    and writing code I won't regret later. I'm especially interested in software that blends 
+                    engineering and business, where good technical decisions have real impact.
+                </p>
+                <div style="margin-top: 2rem;">
+                    <a href="resume.pdf" class="btn btn-primary" download>Download Resume</a>
+                </div>
+            </div>
+            <div class="about-image">
+                <!-- Profile placeholder -->
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section class="tech fade-in" id="tech">
+        <h2 class="section-title scroll-reveal">Tech Stack</h2>
+        <p class="section-subtitle scroll-reveal scroll-reveal-delay-1">Technologies and tools I work with</p>
+        
+        <!-- Interactive Skill Visualization -->
+        <div class="skill-visualization scroll-reveal scroll-reveal-delay-2" id="skillViz">
+            <div class="skill-tooltip" id="skillTooltip"></div>
+            <!-- Nodes will be dynamically created -->
+        </div>
+
+        <div class="tech-grid">
+            <div class="tech-card">
+                <div class="tech-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                </div>
+                <div class="tech-name">Frontend</div>
+                <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                    HTML, CSS, JavaScript, TypeScript, React, Next.js, Vue
+                </div>
+            </div>
+            <div class="tech-card">
+                <div class="tech-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.36 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.64-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
+                </div>
+                <div class="tech-name">AWS Services</div>
+                <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                    Lambda, Lightsail, Cognito, DynamoDB, API Gateway, S3
+                </div>
+            </div>
+            <div class="tech-card">
+                <div class="tech-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/><path d="M2 4h20v16H2z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                </div>
+                <div class="tech-name">Backend</div>
+                <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                    Node.js, PHP, Serverless Functions
+                </div>
+            </div>
+            <div class="tech-card">
+                <div class="tech-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/></svg>
+                </div>
+                <div class="tech-name">Databases</div>
+                <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                    PostgreSQL, SQLite, DynamoDB
+                </div>
+            </div>
+            <div class="tech-card">
+                <div class="tech-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                </div>
+                <div class="tech-name">Deployment</div>
+                <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                    Vercel, Railway, Cloudflare R2, AWS Lightsail
+                </div>
+            </div>
+            <div class="tech-card">
+                <div class="tech-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+                <div class="tech-name">3D & Graphics</div>
+                <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                    Three.js
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects fade-in" id="projects">
+        <h2 class="section-title scroll-reveal">Featured Projects</h2>
+        <p class="section-subtitle scroll-reveal scroll-reveal-delay-1">Case studies showcasing problem-solving and technical expertise</p>
+        
+        <div class="project-grid">
+            <!-- Project 1: BlueprintCAD -->
+            <div class="project-card" data-skills="next.js,typescript,react,postgresql,vercel,railway,stripe,gemini ai,javascript,three.js">
+                <div class="project-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                <div class="project-content">
+                    <h3 class="project-title">BlueprintCAD.io</h3>
+                    <div class="project-meta">
+                        <span class="project-tag">Next.js</span>
+                        <span class="project-tag">TypeScript</span>
+                        <span class="project-tag">React</span>
+                        <span class="project-tag">PostgreSQL</span>
+                        <span class="project-tag">Vercel</span>
+                        <span class="project-tag">Railway</span>
+                        <span class="project-tag">Stripe</span>
+                        <span class="project-tag">Gemini AI</span>
+                    </div>
+                    
+                    <div class="project-case-study">
+                        <div class="case-study-section">
+                            <span class="case-study-label">Problem:</span>
+                            <p class="case-study-text">
+                                There was no centralized platform for 3D model and CAD file sharing, collaboration, and management. 
+                                Users needed a way to organize, share, and monetize their 3D assets while providing an interactive 
+                                viewing experience.
+                            </p>
+                        </div>
+                        <div class="case-study-section">
+                            <span class="case-study-label">Solution:</span>
+                            <p class="case-study-text">
+                                Built a full-stack SaaS platform with Next.js and TypeScript (100k+ lines of code) featuring 
+                                multi-provider authentication (email, Google, GitHub), project management, social collaboration 
+                                tools, and an interactive 3D viewer. Integrated Stripe for payments, PostgreSQL for data storage 
+                                on Railway, Cloudflare R2 for asset storage, and Gemini AI for intelligent quote generation. 
+                                Deployed frontend on Vercel with serverless architecture.
+                            </p>
+                        </div>
+                        <div class="case-study-section">
+                            <span class="case-study-label">Result:</span>
+                            <p class="case-study-text">
+                                Created a production-ready platform enabling users to upload, organize, share, and monetize 3D models. 
+                                The marketplace and collaboration features provide a complete ecosystem for 3D content creators and 
+                                consumers, with scalable architecture supporting growth.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="architecture-diagram">
+                        <p><strong>Architecture:</strong> Next.js Frontend (Vercel) → API Routes → PostgreSQL (Railway) → Cloudflare R2 (Assets) → Stripe (Payments) → Gemini AI (Quotes)</p>
+                    </div>
+
+                    <div class="project-links">
+                        <a href="https://blueprintcad.io" class="project-link project-link-primary" target="_blank">
+                            Live Demo
+                        </a>
+                        <a href="https://github.com/CEMAMI09/BlueprintCAD" class="project-link project-link-secondary" target="_blank">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2: Intake Forms & Certification System -->
+            <div class="project-card" data-skills="html,css,javascript,aws lightsail,php">
+                <div class="project-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+                <div class="project-content">
+                    <h3 class="project-title">Intake Forms & Certification Quizzes</h3>
+                    <div class="project-meta">
+                        <span class="project-tag">HTML</span>
+                        <span class="project-tag">CSS</span>
+                        <span class="project-tag">JavaScript</span>
+                        <span class="project-tag">AWS Lightsail</span>
+                        <span class="project-tag">Client Management</span>
+                    </div>
+                    
+                    <div class="project-case-study">
+                        <div class="case-study-section">
+                            <span class="case-study-label">Problem:</span>
+                            <p class="case-study-text">
+                                Clients needed a streamlined system to collect intake information and conduct certification quizzes. 
+                                Staff required a centralized dashboard to view and manage client data efficiently, replacing 
+                                manual processes with automated workflows.
+                            </p>
+                        </div>
+                        <div class="case-study-section">
+                            <span class="case-study-label">Solution:</span>
+                            <p class="case-study-text">
+                                Developed custom intake forms and certification quiz systems using HTML, CSS, and JavaScript. 
+                                Created an administrative dashboard for staff to manage client information, track completions, 
+                                and monitor certification status. Deployed the entire system on AWS Lightsail for reliable hosting 
+                                and easy scalability.
+                            </p>
+                        </div>
+                        <div class="case-study-section">
+                            <span class="case-study-label">Result:</span>
+                            <p class="case-study-text">
+                                Streamlined client onboarding and certification processes. Staff can now efficiently manage client 
+                                data through a centralized dashboard, reducing manual data entry time and improving tracking accuracy. 
+                                The system handles form submissions and quiz completions automatically.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="project-links">
+                        <a href="#" class="project-link project-link-primary" target="_blank">
+                            Live Demo
+                        </a>
+                        <a href="https://github.com/CEMAMI09/EVOQ_FORMS" class="project-link project-link-secondary" target="_blank">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3: SightGard Twilight -->
+            <div class="project-card" data-skills="vue 3,aws cognito,lambda,dynamodb,api gateway,javascript">
+                <div class="project-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
+                <div class="project-content">
+                    <h3 class="project-title">SightGard Twilight - Certification Quiz System</h3>
+                    <div class="project-meta">
+                        <span class="project-tag">Vue 3</span>
+                        <span class="project-tag">AWS Cognito</span>
+                        <span class="project-tag">Lambda</span>
+                        <span class="project-tag">DynamoDB</span>
+                        <span class="project-tag">API Gateway</span>
+                        <span class="project-tag">Healthcare</span>
+                    </div>
+                    
+                    <div class="project-case-study">
+                        <div class="case-study-section">
+                            <span class="case-study-label">Problem:</span>
+                            <p class="case-study-text">
+                                Eye care professionals administering dark adaptation tests needed a certification system to ensure 
+                                proper training and compliance. The system required randomized quizzes, progress tracking, and 
+                                certification status management integrated with the clinical management platform.
+                            </p>
+                        </div>
+                        <div class="case-study-section">
+                            <span class="case-study-label">Solution:</span>
+                            <p class="case-study-text">
+                                Designed and implemented the certification quiz system using Vue 3 with Composition API. Built a 
+                                10-question interactive quiz covering CPT codes, patient selection, test procedures, and device 
+                                operation. Integrated with AWS Cognito for authentication, Lambda functions for quiz logic, 
+                                DynamoDB for storing results, and API Gateway for RESTful endpoints. Implemented question 
+                                randomization, real-time progress tracking, and automatic certification scoring with three-tier 
+                                results (certified, certified with refresher, or retrain required).
+                            </p>
+                        </div>
+                        <div class="case-study-section">
+                            <span class="case-study-label">Result:</span>
+                            <p class="case-study-text">
+                                Provided a comprehensive certification system that ensures operator competency for the dark adaptation 
+                                test. The quiz history tracking allows clinics to monitor staff certification status over time, 
+                                improving quality assurance and compliance with clinical standards. The randomized question system 
+                                prevents memorization and ensures genuine understanding of procedures.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="architecture-diagram">
+                        <p><strong>Architecture:</strong> Vue 3 Frontend → AWS Cognito (Auth) → API Gateway → Lambda Functions → DynamoDB (Quiz Results & History)</p>
+                    </div>
+
+                    <div class="project-links">
+                        <a href="#" class="project-link project-link-primary" target="_blank">
+                            Live Demo
+                        </a>
+                        <a href="https://github.com/CEMAMI09" class="project-link project-link-secondary" target="_blank">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact fade-in" id="contact">
+        <div class="contact-container">
+            <h2 class="section-title scroll-reveal">Get In Touch</h2>
+            <p class="section-subtitle scroll-reveal scroll-reveal-delay-1">
+                I'm always open to discussing new projects, creative ideas, or opportunities.
+            </p>
+            <div class="contact-links">
+                <a href="mailto:codyemami@gmail.com" class="contact-link">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    Email
+                </a>
+                <a href="https://www.linkedin.com/in/cody-emami-65970b394" class="contact-link" target="_blank">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    LinkedIn
+                </a>
+                <a href="https://github.com/CEMAMI09" class="contact-link" target="_blank">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Cody Emami. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Dark Mode Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        
+        if (currentTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            themeToggle.querySelector('.theme-toggle-slider').textContent = '☀️';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            themeToggle.querySelector('.theme-toggle-slider').textContent = newTheme === 'dark' ? '☀️' : '🌙';
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // Interactive Skill Visualization
+        const skills = [
+            // Core Web
+            { name: 'HTML', x: 15, y: 15, category: 'Core', color: '#e34c26', connections: ['React', 'Next.js', 'Vue'] },
+            { name: 'CSS', x: 15, y: 40, category: 'Core', color: '#264de4', connections: ['React', 'Next.js'] },
+            { name: 'JS', x: 15, y: 65, category: 'Core', color: '#f7df1e', connections: ['React', 'Node.js', 'TypeScript'] },
+            { name: 'TypeScript', x: 15, y: 90, category: 'Core', color: '#3178c6', connections: ['React', 'Next.js', 'Node.js'] },
+            
+            // Frontend Frameworks
+            { name: 'React', x: 45, y: 20, category: 'Frontend', color: '#61dafb', connections: ['Next.js', 'Node.js', 'Lambda'] },
+            { name: 'Next.js', x: 45, y: 50, category: 'Frontend', color: '#000000', connections: ['Vercel', 'React', 'Node.js'] },
+            { name: 'Vue', x: 45, y: 80, category: 'Frontend', color: '#4fc08d', connections: ['Node.js'] },
+            { name: 'Three.js', x: 45, y: 110, category: 'Frontend', color: '#000000', connections: ['React'] },
+            
+            // Backend
+            { name: 'Node.js', x: 75, y: 25, category: 'Backend', color: '#339933', connections: ['Lambda', 'PostgreSQL', 'Railway'] },
+            { name: 'PHP', x: 75, y: 55, category: 'Backend', color: '#777bb4', connections: ['Lightsail'] },
+            
+            // AWS
+            { name: 'Lambda', x: 30, y: 50, category: 'AWS', color: '#ff9900', connections: ['API Gateway', 'DynamoDB', 'S3'] },
+            { name: 'S3', x: 60, y: 45, category: 'AWS', color: '#ff9900', connections: ['Lambda', 'Cloudflare'] },
+            { name: 'Cognito', x: 30, y: 75, category: 'AWS', color: '#ff9900', connections: ['API Gateway'] },
+            { name: 'DynamoDB', x: 60, y: 75, category: 'AWS', color: '#ff9900', connections: ['Lambda'] },
+            { name: 'API Gateway', x: 45, y: 130, category: 'AWS', color: '#ff9900', connections: ['Lambda', 'Cognito'] },
+            { name: 'Lightsail', x: 75, y: 85, category: 'AWS', color: '#ff9900', connections: ['PHP'] },
+            
+            // Databases
+            { name: 'PostgreSQL', x: 75, y: 40, category: 'Database', color: '#336791', connections: ['Node.js', 'Railway'] },
+            { name: 'SQLite', x: 75, y: 70, category: 'Database', color: '#003b57', connections: ['Node.js'] },
+            
+            // Deployment
+            { name: 'Vercel', x: 60, y: 15, category: 'Deployment', color: '#000000', connections: ['Next.js'] },
+            { name: 'Railway', x: 60, y: 110, category: 'Deployment', color: '#0b0d0e', connections: ['Node.js', 'PostgreSQL'] },
+            { name: 'Cloudflare', x: 30, y: 110, category: 'Deployment', color: '#f38020', connections: ['S3'] },
+        ];
+
+        const skillViz = document.getElementById('skillViz');
+        const tooltip = document.getElementById('skillTooltip');
+        const skillNodes = {};
+        
+        // Create skill nodes
+        skills.forEach((skill, index) => {
+            const node = document.createElement('div');
+            node.className = 'skill-node';
+            node.textContent = skill.name;
+            node.style.backgroundColor = skill.color;
+            node.style.left = skill.x + '%';
+            node.style.top = skill.y + '%';
+            node.setAttribute('data-category', skill.category);
+            node.setAttribute('data-name', skill.name);
+            node.setAttribute('data-index', index);
+            
+            // Store node reference
+            skillNodes[skill.name] = node;
+            
+            // Calculate position for tooltip
+            node.addEventListener('mouseenter', (e) => {
+                const rect = skillViz.getBoundingClientRect();
+                const nodeRect = node.getBoundingClientRect();
+                tooltip.textContent = `${skill.name} • ${skill.category}`;
+                
+                // Position tooltip above or below based on node position
+                const tooltipTop = nodeRect.top - rect.top - 45;
+                tooltip.style.left = (nodeRect.left - rect.left + nodeRect.width / 2) + 'px';
+                tooltip.style.top = (tooltipTop > 0 ? tooltipTop : nodeRect.bottom - rect.top + 10) + 'px';
+                tooltip.style.transform = 'translateX(-50%)';
+                tooltip.classList.add('show');
+                node.classList.add('active');
+            });
+            
+            node.addEventListener('mouseleave', () => {
+                if (!node.classList.contains('selected')) {
+                    tooltip.classList.remove('show');
+                    node.classList.remove('active');
+                }
+            });
+
+            // Click handler to navigate to skill page
+            node.addEventListener('click', () => {
+                navigateToSkillPage(skill.name);
+            });
+            
+            skillViz.appendChild(node);
+        });
+
+        // Skill name mapping (for matching skill visualization names to project data-skills)
+        const skillNameMap = {
+            'HTML': 'html',
+            'CSS': 'css',
+            'JS': 'javascript',
+            'JavaScript': 'javascript',
+            'TypeScript': 'typescript',
+            'React': 'react',
+            'Next.js': 'next.js',
+            'Vue': 'vue 3',
+            'Vue 3': 'vue 3',
+            'Three.js': 'three.js',
+            'Node.js': 'node.js',
+            'PHP': 'php',
+            'Lambda': 'lambda',
+            'S3': 's3',
+            'Cognito': 'aws cognito',
+            'DynamoDB': 'dynamodb',
+            'API Gateway': 'api gateway',
+            'Lightsail': 'aws lightsail',
+            'PostgreSQL': 'postgresql',
+            'SQLite': 'sqlite',
+            'Vercel': 'vercel',
+            'Railway': 'railway',
+            'Cloudflare': 'cloudflare'
+        };
+
+        // Store all projects HTML for reuse
+        const projectCards = document.querySelectorAll('#projects .project-card');
+        const skillProjectsPage = document.getElementById('skillProjectsPage');
+        const skillProjectsGrid = document.getElementById('skillProjectsGrid');
+        const skillPageTitle = document.getElementById('skillPageTitle');
+        const skillPageDescription = document.getElementById('skillPageDescription');
+        const backButton = document.getElementById('backButton');
+        const mainSections = document.querySelectorAll('section');
+
+        // Navigate to skill-specific projects page
+        function navigateToSkillPage(skillName) {
+            const normalizedSkill = skillNameMap[skillName] || skillName.toLowerCase();
+            
+            // Hide main sections, show skill page
+            mainSections.forEach(section => {
+                section.style.display = 'none';
+            });
+            skillProjectsPage.classList.add('active');
+            
+            // Update page title and description
+            skillPageTitle.textContent = `Projects using ${skillName}`;
+            skillPageDescription.textContent = `A collection of projects that utilize ${skillName} in their tech stack.`;
+            
+            // Filter and display projects
+            const matchingProjects = Array.from(projectCards).filter(card => {
+                const cardSkills = card.getAttribute('data-skills').toLowerCase();
+                return cardSkills.includes(normalizedSkill);
+            });
+            
+            // Clear and populate skill projects grid
+            skillProjectsGrid.innerHTML = '';
+            if (matchingProjects.length > 0) {
+                matchingProjects.forEach(project => {
+                    const clonedProject = project.cloneNode(true);
+                    skillProjectsGrid.appendChild(clonedProject);
+                });
+                // Hover effects are handled by CSS, no need to reattach
+            } else {
+                skillProjectsGrid.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 3rem;">No projects found using this technology.</p>';
+            }
+            
+            // Update URL hash
+            window.location.hash = `skill/${normalizedSkill}`;
+            
+            // Scroll to top with slower custom scroll
+            smoothScrollToTop();
+        }
+
+        // Back button functionality
+        backButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            skillProjectsPage.classList.remove('active');
+            mainSections.forEach(section => {
+                section.style.display = 'block';
+            });
+            window.location.hash = '';
+            smoothScrollToTop();
+        });
+
+        // Handle hash changes for direct links
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash.replace('#skill/', '');
+            if (hash && hash !== '#') {
+                const skillName = Object.keys(skillNameMap).find(key => 
+                    skillNameMap[key] === hash
+                ) || hash;
+                navigateToSkillPage(skillName);
+            } else {
+                skillProjectsPage.classList.remove('active');
+                mainSections.forEach(section => {
+                    section.style.display = 'block';
+                });
+            }
+        });
+
+        // Check initial hash on load
+        if (window.location.hash.startsWith('#skill/')) {
+            const skillHash = window.location.hash.replace('#skill/', '');
+            const skillName = Object.keys(skillNameMap).find(key => 
+                skillNameMap[key] === skillHash
+            ) || skillHash;
+            navigateToSkillPage(skillName);
+        }
+
+        // Navigation scroll effect
+        const navbar = document.getElementById('navbar');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Active nav link on scroll
+        const sections = document.querySelectorAll('section[id]');
+        
+        function activateNavLink() {
+            const scrollY = window.pageYOffset;
+            
+            sections.forEach(section => {
+                const sectionHeight = section.offsetHeight;
+                const sectionTop = section.offsetTop - 100;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }
+
+        window.addEventListener('scroll', activateNavLink);
+
+        // Custom smooth scroll to top function
+        function smoothScrollToTop() {
+            const duration = 800;
+            const start = window.pageYOffset;
+            const startTime = performance.now();
+
+            function animation(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const ease = progress * (2 - progress); // ease out
+                window.scrollTo(0, start * (1 - ease));
+                if (progress < 1) requestAnimationFrame(animation);
+            }
+            requestAnimationFrame(animation);
+        }
+
+        // Custom smooth scroll function with slower speed
+        function smoothScrollToElement(element, offset = 80) {
+            const targetPosition = element.offsetTop - offset;
+            const startPosition = window.pageYOffset;
+            const distance = targetPosition - startPosition;
+            const duration = 1000; // 1 second for slower scroll
+            let start = null;
+
+            function animation(currentTime) {
+                if (start === null) start = currentTime;
+                const timeElapsed = currentTime - start;
+                const run = easeInOutCubic(timeElapsed, startPosition, distance, duration);
+                window.scrollTo(0, run);
+                if (timeElapsed < duration) requestAnimationFrame(animation);
+            }
+
+            function easeInOutCubic(t, b, c, d) {
+                t /= d / 2;
+                if (t < 1) return c / 2 * t * t * t + b;
+                t -= 2;
+                return c / 2 * (t * t * t + 2) + b;
+            }
+
+            requestAnimationFrame(animation);
+        }
+
+        // Smooth scroll for nav links
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                if (targetSection) {
+                    smoothScrollToElement(targetSection, 80);
+                }
+
+                // Close mobile menu if open
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        mobileMenuToggle.addEventListener('click', () => {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+
+        // Smooth scroll for CTA buttons
+        const viewWorkBtn = document.getElementById('viewWorkBtn');
+        const getInTouchBtn = document.getElementById('getInTouchBtn');
+        
+        if (viewWorkBtn) {
+            viewWorkBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetSection = document.querySelector('#projects');
+                if (targetSection) {
+                    smoothScrollToElement(targetSection, 80);
+                }
+            });
+        }
+        
+        if (getInTouchBtn) {
+            getInTouchBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetSection = document.querySelector('#contact');
+                if (targetSection) {
+                    smoothScrollToElement(targetSection, 80);
+                }
+            });
+        }
+
+        // Enhanced scroll animation with reveal on both scroll directions
+        const observerOptions = {
+            threshold: 0.05,
+            rootMargin: '0px 0px 100px 0px'
+        };
+
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with fade-in or scroll-reveal classes
+        document.querySelectorAll('.fade-in, .scroll-reveal').forEach(el => {
+            scrollObserver.observe(el);
+        });
+
+        // Also add scroll reveal to project cards and tech cards with stagger
+        // Wait for DOM to be fully loaded
+        setTimeout(() => {
+            const projectCards = document.querySelectorAll('#projects .project-card');
+            projectCards.forEach((card, index) => {
+                if (!card.classList.contains('scroll-reveal')) {
+                    card.classList.add('scroll-reveal');
+                    if (index > 0) {
+                        card.classList.add(`scroll-reveal-delay-${Math.min(index % 3 + 1, 3)}`);
+                    }
+                    scrollObserver.observe(card);
+                }
+            });
+
+            const techCards = document.querySelectorAll('.tech-card');
+            techCards.forEach((card, index) => {
+                if (!card.classList.contains('scroll-reveal')) {
+                    card.classList.add('scroll-reveal');
+                    if (index > 0) {
+                        card.classList.add(`scroll-reveal-delay-${Math.min(index % 3 + 1, 3)}`);
+                    }
+                    scrollObserver.observe(card);
+                }
+            });
+        }, 100);
+
+        // Add scroll reveal to section titles and subtitles
+        document.querySelectorAll('.section-title, .section-subtitle').forEach((el, index) => {
+            if (!el.classList.contains('scroll-reveal')) {
+                el.classList.add('scroll-reveal');
+                if (index > 0) {
+                    el.classList.add(`scroll-reveal-delay-${Math.min(index % 2 + 1, 2)}`);
+                }
+                scrollObserver.observe(el);
+            }
+        });
+
+
+        // Project card hover effects are handled by CSS only for consistent transitions
+    </script>
+</body>
+</html>
